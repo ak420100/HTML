@@ -1,0 +1,180 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+h1,
+h2 {
+    color: white;
+}
+
+/* Header Section */
+.account-header-section {
+    background-color: #1e3c72;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.account-header-section h1 {
+    margin: 0;
+}
+
+.nav-section {
+    margin-top: 10px;
+}
+
+.nav-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.nav-section a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.nav-section a:hover {
+    text-decoration: underline;
+}
+
+/* Main Section */
+/*.account-main-section {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}*/
+.account-info-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.account-info-section h2 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.profile-picture-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-picture {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.upload-button {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.upload-button:hover {
+    background-color: #27ae60;
+}
+
+/* Account Info Section */
+.account-info-section {
+    margin-bottom: 30px;
+}
+
+.account-info-section h2 {
+    margin-bottom: 15px;
+}
+
+#account-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#account-form label {
+    font-weight: bold;
+}
+
+#account-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+#account-form button {
+    padding: 10px 20px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#account-form button:hover {
+    background-color: #27ae60;
+}
+
+/* Habit List Section */
+#account-habit-list h2 {
+    color: #1e3c72;
+    text-align: center;
+}
+
+.habit-list-section {
+    margin-top: 30px;
+}
+
+.habit-list-section h2 {
+    margin-bottom: 15px;
+}
+
+.habit-list-section ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.habit-list-section li {
+    padding: 10px;
+    background-color: #64acbe;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* Footer Section */
+.account-footer-section {
+    text-align: center;
+    padding: 15px;
+    background-color: #1e3c72;
+    color: white;
+    margin-top: 30px;
+}
+
+.account-footer-section p {
+    margin: 0;
+    font-size: 14px;
+}

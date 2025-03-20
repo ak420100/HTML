@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #6a11cb 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white; /* Default text color to white for better contrast */
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+    backdrop-filter: blur(10px); /* Blur background behind */
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    text-align: center;
+    width: 500px; /* Increase width of the container */
+    padding: 30px; /* Increase padding for the container */
+    border-radius: 10px; /* Smooth edges */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Light border */
+}
+
+.friendsTitle {
+    color: white;
+    font-size: 36px; /* Increase font size */
+    font-weight: bold;
+    margin-bottom: 30px; /* Increase margin below the title */
+    text-align: center; /* Center the title */
+}
+
+.friendsList {
+    list-style-type: none;
+    padding: 0;
+    color: white;
+    font-size: 18px;
+}
+
+.friendsList li {
+    background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white for list items */
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+}

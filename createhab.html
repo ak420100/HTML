@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Habit</title>
+    <link rel="stylesheet" href="createhabstyle.css"> <!-- Link to CSS -->
+</head>
+<body>
+    <div class="habitContainer">
+        <h1>Create New Habit</h1>
+        <form id="createhabForm">
+            <input type="text" id="habName" name="habName" placeholder="Habit Name" required>
+            <label for="habNumber">Select Frequency:</label>
+            <input type="number" id="habNumber" name="habNumber" min="1" max="31" required placeholder="1-30">
+            <select id="habFrequency" name="habFrequency" required>
+                <option value="">Select Frequency</option>
+                <option value="Days">Days</option>
+                <option value="Weeks">Weeks</option>
+                <option value="Months">Months</option>
+                <option value="Years">Years</option>
+            </select>
+            <label for="habNumber">How long do you want to do this habit:</label>
+            <input type="number" id="habDuration" name="habDuration" min="1" max="30" required placeholder="Duration of habit in days">
+            <input type="text" id="habDesc" name="habDesc" placeholder="Habit Description">
+            <button type="submit">Submit</button>
+        </form>
+        <p id="responseMessage"></p>
+    </div>
+
+    <!-- Move the script here so it loads after the HTML -->
+    <script src="script.js"></script>
+</body>
+</html>
