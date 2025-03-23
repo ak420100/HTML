@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Settings</title>
+  <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+  <div class="settings-container">
+    <h1>User Settings</h1>
+    <form id="settingsForm">
+      <label class="toggle">
+        <input type="checkbox" id="darkMode">
+        <span class="slider"></span>
+        <span class="label-text">Dark Mode</span>
+      </label>
+
+      <label class="toggle">
+        <input type="checkbox" id="notifications">
+        <span class="slider"></span>
+        <span class="label-text">Enable Notifications</span>
+      </label>
+
+      <button type="submit">Save Changes</button>
+      <p id="statusMessage"></p>
+    </form>
+  </div>
+
+  <script>
+    // Load settings
+    fetch('settings.php')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("darkMode").checked = data.dark_mode == 1;
+        document.getElementById("notifications").checked = data.notification_enabled == 1;
+      });
+
+    // Save settings
+    document.getElementById("settingsForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const data = {
+        dark_mode: document.getElementById("darkMode").checked ? 1 : 0,
+        notification_enabled: document.getElementById("notifications").checked ? 1 : 0
+      };
+
+      fetch("update_settings.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      })
+        .then(res => res.json())
+        .then(result => {
+          const msg = document.getElementById("statusMessage");
+          msg.textContent = result.success || result.error;
+          msg.style.color = result.success ? "limegreen" : "red";
+        });
+    });
+  </script>
+</body>
+</html>
