@@ -1,45 +1,100 @@
+// ✅ Login submission
 document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("signupForm").addEventListener("submit", async function (event) {
-        event.preventDefault();
+    const loginForm = document.getElementById("LoginPage");
 
-        const formData = {
-            username: document.getElementById("username").value,
-            email: document.getElementById("email").value,
-            password: document.getElementById("password").value
-        };
+    if (loginForm) {
+        loginForm.addEventListener("submit", function (event) {
+            event.preventDefault();
 
-        try {
-            const response = await fetch("signup.php", {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            fetch("login.php", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/x-www-form-urlencoded"
                 },
-                body: JSON.stringify(formData)
+                body: new URLSearchParams({
+                    email: email,
+                    password: password
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                const responseMessage = document.getElementById("responseMessage");
+
+                console.log("Login response:", data); // ✅ Debug
+
+                if (data.error) {
+                    responseMessage.style.color = "red";
+                    responseMessage.textContent = data.error;
+                } else if (data.success) {
+                    responseMessage.style.color = "green";
+                    responseMessage.textContent = data.success;
+
+                    // ✅ Redirect after a short delay
+                    setTimeout(() => {
+                        window.location.href = "index.html";
+                    }, 1500);
+                }
+            })
+            .catch(err => {
+                console.error("Login error:", err);
+                document.getElementById("responseMessage").textContent = "Something went wrong.";
             });
+        });
+    }
 
-            const result = await response.json();
-            const responseMessage = document.getElementById("responseMessage");
+    // ✅ Dark mode fetch
+    fetch('darkmode.php')
+      .then(res => res.json())
+      .then(data => {
+          if (data.dark === true) {
+              document.body.classList.add('dark-mode');
+          }
+      });
 
-            if (result.error) {
-                responseMessage.style.color = "red";
-                responseMessage.textContent = result.error;
-            } else if (result.success) {
-                responseMessage.style.color = "green";
-                responseMessage.textContent = result.success;
+    // ✅ Optional: helper for page navigation
+    window.goToPage = function (page) {
+        window.location.href = page;
+    };
+});
+document.getElementById("signupForm").addEventListener("submit", function (event) {
+    event.preventDefault();
 
-                // Redirect after 2 seconds
-                setTimeout(() => {
-                    window.location.href = "friend.html";
-                }, 2000);
-            }
-        } catch (error) {
-            console.error("Fetch Error:", error);
+    const username = document.getElementById("username").value;
+    const email    = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    fetch("signup.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            username: username,
+            email: email,
+            password: password
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        const responseMessage = document.getElementById("responseMessage");
+        if (data.error) {
+            responseMessage.style.color = "red";
+            responseMessage.textContent = data.error;
+        } else {
+            responseMessage.style.color = "green";
+            responseMessage.textContent = data.success;
+
+            // Redirect after a delay
+            setTimeout(() => {
+                window.location.href = "friend.html";
+            }, 1500);
         }
+    })
+    .catch(err => {
+        console.error("Signup error:", err);
+        document.getElementById("responseMessage").textContent = "Something went wrong.";
     });
 });
-
-
-// Function to navigate to another page
-function goToPage(page) {
-    window.location.href = page;
-}

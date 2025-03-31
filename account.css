@@ -56,14 +56,14 @@ h2 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }*/
-.account-info-section {
+.account-info-update-section {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
 }
 
-.account-info-section h2 {
+.account-info-update-section h2 {
     text-align: center;
     margin-bottom: 15px;
 }
@@ -98,11 +98,11 @@ h2 {
 }
 
 /* Account Info Section */
-.account-info-section {
+.account-info-update-section {
     margin-bottom: 30px;
 }
 
-.account-info-section h2 {
+.account-info-update-section h2 {
     margin-bottom: 15px;
 }
 

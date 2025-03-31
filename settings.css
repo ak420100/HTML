@@ -99,3 +99,22 @@ body {
     font-weight: bold;
   }
   
+  /* Dark mode styles */
+body.dark-mode {
+  background: #121212;
+  color: #ffffff;
+}
+
+.settings-container.dark-mode {
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1);
+}
+
+button.dark-mode {
+  background-color: #333;
+  color: #fff;
+}
+
+button.dark-mode:hover {
+  background-color: #444;
+}

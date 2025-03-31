@@ -4,7 +4,8 @@ include 'conn.php'; // Include the database connection
 
 // Check if the user is logged in
 if (!isset($_SESSION['username'])) {
-    die("User not logged in");
+    echo json_encode(["error" => "User not logged in"]);
+    exit;
 }
 
 // Retrieve the username from the session
@@ -21,8 +22,8 @@ if ($conn->connect_error) {
 // Uncomment the line below for debugging
 // echo "Connected successfully";
 
+// Prepare the SQL query to fetch habits for the logged-in user
 $sql = "SELECT 
-    users.username,
     habits.name AS habit_name,
     habits.duration,
     habits.created_at
@@ -31,7 +32,7 @@ FROM
 JOIN
     habits ON users.id = habits.user_id
 WHERE
-    users.username = ?;";
+    users.username = ?";
 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $username);
@@ -44,4 +45,6 @@ while ($row = $result->fetch_assoc()) {
 }
 
 echo json_encode($habits); // Return the data as JSON
+$stmt->close();
+$conn->close();
 ?>

@@ -27,24 +27,52 @@
   </div>
 
   <script>
-    // Load settings
+    // Load settings for the logged-in user
     fetch('settings.php')
       .then(res => res.json())
       .then(data => {
-        document.getElementById("darkMode").checked = data.dark_mode == 1;
-        document.getElementById("notifications").checked = data.notification_enabled == 1;
+        if (data.error) {
+          alert(data.error);
+          return;
+        }
+        const darkModeToggle = document.getElementById("darkMode");
+        const notificationsToggle = document.getElementById("notifications");
+  
+        // Set toggle states
+        darkModeToggle.checked = data.dark_mode == 1;
+        notificationsToggle.checked = data.notification_enabled == 1;
+  
+        // Apply dark mode if enabled
+        if (data.dark_mode == 1) {
+          document.body.classList.add("dark-mode");
+          document.querySelector(".settings-container").classList.add("dark-mode");
+          document.querySelector("button").classList.add("dark-mode");
+        }
+  
+        // Listen for dark mode toggle changes
+        darkModeToggle.addEventListener("change", function () {
+          if (darkModeToggle.checked) {
+            document.body.classList.add("dark-mode");
+            document.querySelector(".settings-container").classList.add("dark-mode");
+            document.querySelector("button").classList.add("dark-mode");
+          } else {
+            document.body.classList.remove("dark-mode");
+            document.querySelector(".settings-container").classList.remove("dark-mode");
+            document.querySelector("button").classList.remove("dark-mode");
+          }
+        });
       });
-
-    // Save settings
+  
+    // Save settings for the logged-in user
     document.getElementById("settingsForm").addEventListener("submit", function (e) {
       e.preventDefault();
-
+  
       const data = {
         dark_mode: document.getElementById("darkMode").checked ? 1 : 0,
         notification_enabled: document.getElementById("notifications").checked ? 1 : 0
       };
-
-      fetch("update_settings.php", {
+  
+      fetch("settings.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)

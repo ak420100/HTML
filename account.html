@@ -1,3 +1,4 @@
+<?php include 'darkmode.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,14 +13,27 @@
         <nav class="nav-section">
             <ul class="account-links">
                 <li class="account-item"><a href="index.html">Home</a></li>
-                <li class="account-item"><a href="account.html">Account</a></li>
                 <li class="account-item"><a href="logout.html">Logout</a></li>
+                <li class="account-item"><a href="profile.html">Profile</a></li>
             </ul>
         </nav>
     </header>
     
     <main class="account-main-section">
+
         <section id="account-info" class="account-info-section">
+            <h2>Account Information</h2>
+            <div class="profile-picture-section">
+                <img src="profile-placeholder.png" alt="Profile Picture" class="profile-picture">
+            </div>
+            <div class="account-details">
+                <p><strong>Username:</strong> JohnDoe</p>
+                <p><strong>Email:</strong> john.doe@example.com</p>
+                <p><strong>Phone Number:</strong> +123456789</p>
+            </div>
+        </section>
+
+        <section id="account-info-update" class="account-info-update-section">
             <h2>Account Information</h2>
             <div class="profile-picture-section">
         <img src="profile-placeholder.png" alt="Profile Picture" class="profile-picture">
@@ -55,6 +69,28 @@
                 <li>Wake Up Early</li>
             </ul>
         </section>
+
+        <section id="account-habit-update" class="habit-update-section">
+    <h2>Update Your Habits</h2>
+    <form id="habit-form">
+        <label for="habit1">Habit 1:</label>
+        <input type="text" id="habit1" name="habit1" value="Exercise" required>
+
+        <label for="habit2">Habit 2:</label>
+        <input type="text" id="habit2" name="habit2" value="Read" required>
+
+        <label for="habit3">Habit 3:</label>
+        <input type="text" id="habit3" name="habit3" value="Meditate" required>
+
+        <label for="habit4">Habit 4:</label>
+        <input type="text" id="habit4" name="habit4" value="Drink Water" required>
+
+        <label for="habit5">Habit 5:</label>
+        <input type="text" id="habit5" name="habit5" value="Wake Up Early" required>
+
+        <button type="submit">Save Habits</button>
+    </form>
+</section>
     </main>
     
     <footer class="account-footer-section">

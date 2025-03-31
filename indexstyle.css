@@ -7,8 +7,13 @@ body {
     justify-content: center;
 }
 
-header {
-    width: 100%;
+p {
+    color: #340483; /* Change text color to white (or any desired color) */
+    font-weight: bold; /* Make the text bold */
+}
+
+header{
+   width: 100%;
     background-color: #157de68b;
     padding: 20px;
     box-sizing: border-box;

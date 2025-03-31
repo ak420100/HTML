@@ -9,13 +9,45 @@
 <body>
     <div class="container">
         <h1 class="friendsTitle">Your Friends</h1>
-        <div class="friendContainer">
-            <ul id="friendsList" class="friendsList">
-                alice
-            </ul>
+        <div class="friendContainer" action="friendlist.php" method="GET">
+            <form id="friendForm" action="friendlist.php" method="GET" class="addFriendForm">
+                <label for="friendName">Name:</label>
+                <input type="text" id="friendName" name="friendName" required>
+                
+                <label for="friendEmail">Email:</label>
+                <input type="email" id="friendEmail" name="friendEmail" required>
+                
+                <label for="friendHabits">Habits:</label>
+                <input type="text" id="friendHabits" name="friendHabits" >
+                
+                <button type="submit" id="addFriend">Add Friend</button>
+            </form>
+            <table class="friendsTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>All Habits</th>
+                    </tr>
+                </thead>
+                <tbody id="friendsList">
+                    <!-- Example row -->
+                    <tr>
+                        <td>Alice</td>
+                        <td>alice@example.com</td>
+                        <td>Reading, Hiking</td>
+                    </tr>
+                    <tr>
+                        <td>Bob</td>
+                        <td>bob@example.com</td>
+                        <td>Gaming, Cooking</td> <!-- No shared habits -->
+                    </tr>
+                    <!-- More rows will be dynamically added here -->
+                </tbody>
+            </table>
         </div>
     </div>
     <!-- Move the script here so it loads after the HTML -->
-    <script src=script.jss"></script>
+    <script src="script.js"></script>
 </body>
 </html>

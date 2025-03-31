@@ -51,6 +51,10 @@ button:hover {
     height: 30px;
 }
 
+body.dark-mode {
+    background-color: #121212;
+    color: #f1f1f1;
+}
 
 
 
