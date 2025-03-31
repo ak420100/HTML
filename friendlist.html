@@ -9,8 +9,8 @@
 <body>
     <div class="container">
         <h1 class="friendsTitle">Your Friends</h1>
-        <div class="friendContainer" action="friendlist.php" method="GET">
-            <form id="friendForm" action="friendlist.php" method="GET" class="addFriendForm">
+        <div class="friendContainer">
+            <form id="friendForm" action="friendlist.php" method="POST" class="addFriendForm">
                 <label for="friendName">Name:</label>
                 <input type="text" id="friendName" name="friendName" required>
                 
@@ -18,7 +18,7 @@
                 <input type="email" id="friendEmail" name="friendEmail" required>
                 
                 <label for="friendHabits">Habits:</label>
-                <input type="text" id="friendHabits" name="friendHabits" >
+                <input type="text" id="friendHabits" name="friendHabits">
                 
                 <button type="submit" id="addFriend">Add Friend</button>
             </form>
@@ -28,21 +28,11 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>All Habits</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody id="friendsList">
-                    <!-- Example row -->
-                    <tr>
-                        <td>Alice</td>
-                        <td>alice@example.com</td>
-                        <td>Reading, Hiking</td>
-                    </tr>
-                    <tr>
-                        <td>Bob</td>
-                        <td>bob@example.com</td>
-                        <td>Gaming, Cooking</td> <!-- No shared habits -->
-                    </tr>
-                    <!-- More rows will be dynamically added here -->
+                    <!-- Friends will be dynamically added here -->
                 </tbody>
             </table>
         </div>
