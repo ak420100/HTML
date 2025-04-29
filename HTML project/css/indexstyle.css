@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 50px;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    display: block;
+    justify-content: center;
+}
+
+p {
+    color: #340483; /* Change text color to white (or any desired color) */
+    font-weight: bold; /* Make the text bold */
+}
+
+header{
+   width: 100%;
+    background-color: #157de68b;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+#habit-blocks {
+    clear: both; /* Ensure the section clears any floats */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.habit-block {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #157de68b;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.friendContainer{
+    background-color: rgba(240, 124, 135, 0.847);
+    text-align: centre;
+    width: 425px;
+    height: 300px;
+    border-radius: 25px;
+}
+
+#friendsForm{
+    text-align: center;
+    justify-content: center;
+}
+
+
+.friendsTitle{
+    color: rgba(240, 124, 135, 0.847);
+}
+
+#createhabForm{
+    background-color: #f96756;
+    text-align: centre;
+    width: 190px;
+    height: 300px;
+}
+
+.habDuration{
+    width: 19px;
+    height: 30px;
+}

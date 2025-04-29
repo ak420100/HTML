@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friends List</title>
+    <link rel="stylesheet" href="friendliststyle.css">
+</head>
+<body>
+
+<a href="index.html" id="logo">Trabit</a>
+
+<div class="container">
+    <h1 class="friendsTitle">Your Friends</h1>
+    <div class="friendContainer">
+        <form id="friendForm" action="friendlist.php" method="POST" class="addFriendForm">
+            <label for="friendName">Name:</label>
+            <input type="text" id="friendName" name="friendName" required>
+
+            <label for="friendEmail">Email:</label>
+            <input type="email" id="friendEmail" name="friendEmail" required>
+
+            <label for="friendHabits">Habits:</label>
+            <input type="text" id="friendHabits" name="friendHabits">
+
+            <button type="submit" id="addFriend">Add Friend</button>
+        </form>
+
+        <table class="friendsTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>All Habits</th>
+                </tr>
+            </thead>
+            <tbody id="friendsList">
+                <!-- Friends will be added here -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    fetchFriends();
+});
+
+function fetchFriends() {
+    fetch('loadfriends.php')
+        .then(response => response.json())
+        .then(friends => {
+            const table = document.getElementById('friendsList');
+            table.innerHTML = '';
+            friends.forEach(friend => {
+                const row = `<tr>
+                    <td>${friend.friend_id}</td>
+                    <td>${friend.email}</td>
+                    <td>--</td> <!-- No habits for now -->
+                </tr>`;
+                table.innerHTML += row;
+            });
+        })
+        .catch(error => console.error('Error loading friends:', error));
+}
+
+</script>
+
+</body>
+</html>

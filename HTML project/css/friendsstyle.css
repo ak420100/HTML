@@ -1,0 +1,73 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #6a11cb 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-top: 10px; /* Add margin-top to space out buttons */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.friendContainer {
+    background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+    backdrop-filter: blur(10px); /* Blur background behind */
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    text-align: center;
+    width: 500px; /* Increase width of the container */
+    padding: 30px; /* Increase padding for the container */
+    border-radius: 10px; /* Smooth edges */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Light border */
+}
+
+.friendsForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.friendsTitle {
+    color: white;
+    font-size: 36px; /* Increase font size */
+    font-weight: bold;
+    margin-bottom: 30px; /* Increase margin below the title */
+    text-align: center; /* Center the title */
+}
+
+.friendsForm input {
+    width: 80%; /* Increase the width of the input boxes */
+    padding: 15px; /* Increase padding for the input boxes */
+    margin-bottom: 20px; /* Increase space between input boxes */
+    border: 1px solid #ccc; /* Add border to input boxes */
+    border-radius: 5px; /* Add border radius to input boxes */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.friendsForm input::placeholder {
+    color: #999;
+}
+
+.viewFriendsButton {
+    background-color: #28a745; /* Green background for the view friends button */
+}
+
+.viewFriendsButton:hover {
+    background-color: #218838; /* Darker green on hover */
+}
