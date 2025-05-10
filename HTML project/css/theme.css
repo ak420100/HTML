@@ -1,0 +1,43 @@
+/* theme.css */
+
+/* Light mode defaults */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    min-height: 100vh;
+    color: #000;
+  }
+  
+  /* Dark mode */
+  body.dark-mode {
+    background: #121212;
+    color: #ffffff;
+  }
+  
+  /* Generic container in dark mode */
+  .container.dark-mode,
+  .settings-container.dark-mode {
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Buttons in dark mode */
+  button.dark-mode {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  button.dark-mode:hover {
+    background-color: #444;
+  }
+  
+  /* Inputs in dark mode (optional) */
+  input.dark-mode, textarea.dark-mode, select.dark-mode {
+    background-color: #222;
+    color: #fff;
+    border: 1px solid #555;
+  }
+  
+  /* You can add more global elements here later */
+  

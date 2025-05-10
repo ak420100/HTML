@@ -1,0 +1,60 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    min-height: 100vh;
+    color: #fff;
+  }
+  
+  .progress-header {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.6);
+  }
+  
+  .progress-header a {
+    color: #fff;
+    text-decoration: none;
+    margin-top: 10px;
+    display: inline-block;
+  }
+  
+  .progress-main {
+    padding: 40px;
+  }
+  
+  .progress-visual-section {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    padding: 30px;
+    border-radius: 16px;
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  .progress-wrapper {
+    margin-bottom: 20px;
+  }
+  
+  .progress-bar-outer {
+    background-color: #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 20px;
+    width: 100%;
+    margin-top: 5px;
+  }
+  
+  .progress-bar-inner {
+    height: 100%;
+    background-color: #4caf50;
+    width: 0%;
+    transition: width 0.5s ease-in-out;
+  }
+  
+  .progress-footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+  }
+  

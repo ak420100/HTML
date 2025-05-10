@@ -10,12 +10,15 @@ if (!isset($_SESSION['user_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <a href="index1.php" id="logo">Trabit</a>
     <title>Create New Habit</title>
     <link rel="stylesheet" href="createhabstyle.css">
+    <link rel="stylesheet" href="theme.css">
+
 </head>
 <body>
 
-<a href="index.html" id="logo">Trabit</a>
+
 
 <div class="form-container">
     <h1>Create a New Habit</h1>
@@ -49,6 +52,7 @@ if (!isset($_SESSION['user_id'])) {
         </div>
     </form>
 </div>
+<script src="loadSettings.js"></script>
 
 </body>
 </html>

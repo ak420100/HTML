@@ -79,3 +79,10 @@ button:hover {
     font-size: 14px;
     color: #f8f8f8;
 }
+
+/*Logo button*/
+ #logo {
+    color: green;
+    font-size: 1000px;
+
+}

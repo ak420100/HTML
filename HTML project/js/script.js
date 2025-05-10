@@ -1,3 +1,8 @@
+// ✅ Global navigation function (must be outside DOMContentLoaded if using inline onclick)
+function goToPage(page) {
+    window.location.href = page;
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     // ✅ Login Form
     const loginForm = document.getElementById("LoginPage");
@@ -79,9 +84,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // ✅ Friends List Page
     const friendForm = document.getElementById("friendForm");
     const friendsList = document.getElementById("friendsList");
+    const emailError = document.getElementById("emailError");
 
     if (friendForm && friendsList) {
-        // Function to attach event listeners to remove buttons
         function attachRemoveEventListeners() {
             document.querySelectorAll('.removeFriend').forEach(button => {
                 button.addEventListener('click', function () {
@@ -97,29 +102,36 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
 
-        // Submit event for adding a friend
         friendForm.addEventListener("submit", function (event) {
             event.preventDefault();
             const formData = new FormData(friendForm);
+
+            if (emailError) emailError.style.display = 'none';
 
             fetch('friendlist.php', {
                 method: 'POST',
                 body: formData
             })
             .then(response => response.json())
-            .then(() => {
-                fetchFriends();
-                friendForm.reset();
+            .then(data => {
+                if (data.error && emailError) {
+                    emailError.textContent = data.error;
+                    emailError.style.display = 'block';
+                } else {
+                    fetchFriends();
+                    friendForm.reset();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
             });
         });
 
-        // Initial fetch
         function fetchFriends() {
             fetch('friendlist.php')
             .then(res => res.json())
             .then(data => {
-                // Update DOM with data (implement this as needed)
-                friendsList.innerHTML = ''; // Clear list
+                friendsList.innerHTML = '';
                 data.forEach(friend => {
                     const li = document.createElement('li');
                     li.textContent = friend.name;
@@ -132,7 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
         fetchFriends();
     }
 
-    // ✅ Dark Mode Toggle (optional)
+    // ✅ Dark Mode Toggle
     fetch('darkmode.php')
     .then(res => res.json())
     .then(data => {
@@ -140,12 +152,9 @@ document.addEventListener("DOMContentLoaded", function () {
             document.body.classList.add('dark-mode');
         }
     });
-
-    // ✅ Optional: navigation helper
-    window.goToPage = function (page) {
-        window.location.href = page;
-    };
 });
+
+
 const habitForm = document.getElementById("habitForm"); // make sure your form has this ID
 if (habitForm) {
     habitForm.addEventListener("submit", function (event) {
@@ -174,3 +183,206 @@ if (habitForm) {
         });
     });
 }
+
+// ✅ rewards page
+document.addEventListener('DOMContentLoaded', () => {
+    const coinBalanceElement = document.getElementById('coin-balance');
+    const showThemesButton = document.getElementById('show-themes-button');
+    const colorThemesDiv = document.getElementById('color-themes');
+    const themeButtons = document.querySelectorAll('.theme-button');
+
+    let coinBalance = parseInt(localStorage.getItem('coinBalance')) || 1000;
+    coinBalanceElement.textContent = coinBalance;
+
+    // Show/Hide Themes
+    showThemesButton.addEventListener('click', () => {
+        colorThemesDiv.style.display = colorThemesDiv.style.display === 'none' ? 'block' : 'none';
+    });
+
+    // Theme Selection
+    themeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const theme = button.dataset.theme;
+            const cost = parseInt(button.dataset.cost);
+
+            if (coinBalance >= cost) {
+                coinBalance -= cost;
+                coinBalanceElement.textContent = coinBalance;
+
+                applyTheme(theme);
+
+                localStorage.setItem('coinBalance', coinBalance);
+                localStorage.setItem('selectedTheme', theme);
+
+                alert(`Theme ${theme} applied!`);
+            } else {
+                alert("Not enough coins!");
+            }
+        });
+    });
+
+    // Apply Previously Selected Theme
+    const selectedTheme = localStorage.getItem('selectedTheme');
+    if (selectedTheme) {
+        applyTheme(selectedTheme);
+    }
+
+    // Function to Apply Theme
+    function applyTheme(theme) {
+        let backgroundColor, buttonColor;
+
+        switch (theme) {
+            case 'pink':
+                backgroundColor = 'lightpink';
+                buttonColor = 'deeppink';
+                break;
+            case 'blue':
+                backgroundColor = 'lightblue';
+                buttonColor = 'darkblue';
+                break;
+            case 'green':
+                backgroundColor = 'lightgreen';
+                buttonColor = 'darkgreen';
+                break;
+            case 'purple':
+                backgroundColor = 'plum';
+                buttonColor = 'purple';
+                break;
+            case 'orange':
+                backgroundColor = 'orange';
+                buttonColor = 'darkorange';
+                break;
+            case 'gray':
+                backgroundColor = 'lightgray';
+                buttonColor = 'gray';
+                break;
+            default:
+                backgroundColor = '#4facfe';
+                buttonColor = '#007bff';
+        }
+
+        document.body.style.background = `linear-gradient(to right, ${backgroundColor}, ${backgroundColor})`; // Set background gradient
+        document.querySelectorAll('button').forEach(btn => {
+            btn.style.backgroundColor = buttonColor;
+        });
+        document.querySelector('header').style.backgroundColor = buttonColor;
+        document.querySelectorAll('.habit-block').forEach(block => {
+            block.style.backgroundColor = buttonColor;
+        });
+    }
+});
+
+document.querySelector('form').addEventListener('submit', async function (event) {
+    event.preventDefault(); // Prevent the form from submitting normally
+
+    const formData = new FormData(this);
+    const response = await fetch(this.action, {
+        method: 'POST',
+        body: formData
+    });
+
+    const result = await response.json();
+
+    // Clear any previous error messages
+    document.querySelectorAll('.error-message').forEach(el => el.remove());
+
+    if (result.error) {
+        const emailInput = document.querySelector('input[name="friendEmail"]');
+        const errorMessage = document.createElement('div');
+        errorMessage.className = 'error-message';
+        errorMessage.style.color = 'red';
+        errorMessage.style.fontSize = '0.9em';
+        errorMessage.textContent = result.error;
+
+        // Insert the error message after the email input
+        emailInput.parentNode.insertBefore(errorMessage, emailInput.nextSibling);
+    } else if (result.success) {
+        alert('Friend request sent successfully!');
+        location.reload(); // Reload the page or handle success as needed
+    }
+});
+
+
+//rewards page 
+
+document.addEventListener('DOMContentLoaded', () => {
+    const coinBalanceElement = document.getElementById('coin-balance');
+    const themeButtons = document.querySelectorAll('.theme-button');
+
+    // Initialize coin balance (you can replace this with a server-side value if needed)
+    let coinBalance = parseInt(localStorage.getItem('coinBalance')) || 1000;
+    coinBalanceElement.textContent = coinBalance;
+
+    // Theme Selection
+    themeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const theme = button.dataset.theme;
+            const cost = parseInt(button.dataset.cost);
+
+            if (coinBalance >= cost) {
+                // Deduct coins and update balance
+                coinBalance -= cost;
+                coinBalanceElement.textContent = coinBalance;
+
+                // Apply the selected theme
+                applyTheme(theme);
+
+                // Save the updated balance and theme in localStorage
+                localStorage.setItem('coinBalance', coinBalance);
+                localStorage.setItem('selectedTheme', theme);
+
+                alert(`Theme "${theme}" applied!`);
+            } else {
+                alert("Not enough coins!");
+            }
+        });
+    });
+
+    // Apply Previously Selected Theme
+    const selectedTheme = localStorage.getItem('selectedTheme');
+    if (selectedTheme) {
+        applyTheme(selectedTheme);
+    }
+
+    // Function to Apply Theme
+    function applyTheme(theme) {
+        let backgroundColor, buttonColor;
+
+        switch (theme) {
+            case 'pink':
+                backgroundColor = 'lightpink';
+                buttonColor = 'deeppink';
+                break;
+            case 'blue':
+                backgroundColor = 'lightblue';
+                buttonColor = 'darkblue';
+                break;
+            case 'green':
+                backgroundColor = 'lightgreen';
+                buttonColor = 'darkgreen';
+                break;
+            case 'purple':
+                backgroundColor = 'plum';
+                buttonColor = 'purple';
+                break;
+            case 'orange':
+                backgroundColor = 'orange';
+                buttonColor = 'darkorange';
+                break;
+            case 'gray':
+                backgroundColor = 'lightgray';
+                buttonColor = 'gray';
+                break;
+            default:
+                backgroundColor = '#ffffff';
+                buttonColor = '#000000';
+        }
+
+        // Apply the theme to the website
+        document.body.style.background = backgroundColor;
+        document.querySelectorAll('button').forEach(btn => {
+            btn.style.backgroundColor = buttonColor;
+        });
+        document.querySelector('header')?.style.backgroundColor = buttonColor;
+    }
+});

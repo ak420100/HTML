@@ -1,50 +1,52 @@
-<?php
-session_start();
-include 'conn.php'; // Include the database connection
+    <?php
+    header('Content-Type: application/json');
+    include 'conn.php'; // Include the database connection
+    session_start();
 
-// Check if the user is logged in
-if (!isset($_SESSION['username'])) {
-    echo json_encode(["error" => "User not logged in"]);
-    exit;
-}
 
-// Retrieve the username from the session
-$username = $_SESSION['username'];
+    // Enable error reporting for debugging
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
 
-// Create a connection
-$conn = new mysqli($servername, $username, $password, $database);
+    // Check if the user is logged in
+    if (!isset($_SESSION['user_id'])) {
+        error_log("Session user_id not set");
+        echo json_encode(["error" => "User not logged in"]);
+        exit;
+    }
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+    $user_id = $_SESSION['user_id'];
+    error_log("Logged-in user_id: $user_id");
 
-// Uncomment the line below for debugging
-// echo "Connected successfully";
 
-// Prepare the SQL query to fetch habits for the logged-in user
-$sql = "SELECT 
-    habits.name AS habit_name,
-    habits.duration,
-    habits.created_at
-FROM
-    users
-JOIN
-    habits ON users.id = habits.user_id
-WHERE
-    users.username = ?";
+    // Retrieve the username from the session
+    $username = $_SESSION['username'];
+    error_log("Logged-in username: $username");
 
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $username);
-$stmt->execute();
-$result = $stmt->get_result();
+    // Check connection
+    if ($conn->connect_error) {
+        echo json_encode(["error" => "Database connection failed: " . $conn->connect_error]);
+        exit;
+    }
 
-$habits = [];
-while ($row = $result->fetch_assoc()) {
-    $habits[] = $row;
-}
+    // Prepare the SQL query to fetch habits for the logged-in user
+    $sql = "SELECT 
+        habits.name AS habit_name,
+        CONCAT(habits.duration, ' ', habits.duration_unit) AS duration,
+        habits.created_at
+    FROM
+        habits
+    WHERE
+        habits.user_id = ?";
+        
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $user_id);
 
-echo json_encode($habits); // Return the data as JSON
-$stmt->close();
-$conn->close();
-?>
+
+    // Output the data as JSON
+    echo json_encode($habits);
+
+    $stmt->close();
+    $conn->close();
+    ?>

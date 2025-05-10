@@ -6,13 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account - Habit Tracker</title>
     <link rel="stylesheet" href="account.css">
+    <link rel="stylesheet" href="theme.css">
+    <link rel="stylesheet" href="settings.css"> <!-- or another page-specific CSS -->
+
 </head>
 <body>
     <header class="account-header-section">
         <h1>Habit Tracker</h1>
         <nav class="nav-section">
             <ul class="account-links">
-                <li class="account-item"><a href="index.html">Home</a></li>
+                <li class="account-item"><a href="index1.html">Home</a></li>
                 <li class="account-item"><a href="logout.html">Logout</a></li>
                 <li class="account-item"><a href="profile.html">Profile</a></li>
             </ul>
@@ -38,6 +41,8 @@
             <div class="profile-picture-section">
         <img src="profile-placeholder.png" alt="Profile Picture" class="profile-picture">
         <button type="button" class="upload-button">Upload New Picture</button>
+        <input type="file" id="profilePicInput" style="display:none;" accept="image/*">
+
         </div>
             <form id="account-form">
                 <label for="username">Username:</label>
@@ -46,10 +51,8 @@
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
 
-                <label for="phonenumber">Phone Number:</label>
-                <input type="text" id="phonenumber" name="phonenumber" required>
                 
-                <label for="new-password">Password:</label>
+                <label for="new-password">New Password:</label>
                 <input type="password" id="new-password" name="new-password" required>
 
                 <label for="cofirm-password">Confirm Password:</label>
@@ -96,5 +99,92 @@
     <footer class="account-footer-section">
         <p>&copy; 2025 Habit Tracker. All rights reserved.</p>
     </footer>
+    <script>
+        document.getElementById('account-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+        
+            const accountData = {
+                username: document.getElementById('username').value,
+                email: document.getElementById('email').value,
+                phonenumber: document.getElementById('phonenumber').value,
+                new_password: document.getElementById('new-password').value,
+                confirm_password: document.getElementById('confirm-password').value
+            };
+        
+            fetch('account.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(accountData)
+            })
+            .then(res => res.json())
+            .then(result => {
+                if (result.success) {
+                    alert(result.success);
+                } else {
+                    alert(result.error);
+                }
+            });
+        });
+        
+        // Habit form
+        document.getElementById('habit-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+        
+            const habits = [
+                document.getElementById('habit1').value,
+                document.getElementById('habit2').value,
+                document.getElementById('habit3').value,
+                document.getElementById('habit4').value,
+                document.getElementById('habit5').value
+            ];
+        
+            fetch('account.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ habits })
+            })
+            .then(res => res.json())
+            .then(result => {
+                if (result.success) {
+                    alert(result.success);
+                } else {
+                    alert(result.error);
+                }
+            });
+        });
+    </script>
+    <script>
+        document.querySelector('.upload-button').addEventListener('click', function() {
+            document.getElementById('profilePicInput').click();
+        });
+    </script>
+    <script>
+        document.querySelector('.upload-button').addEventListener('click', function() {
+            document.getElementById('profilePicInput').click();
+        });
+        
+        document.getElementById('profilePicInput').addEventListener('change', function() {
+            const file = this.files[0];
+            if (!file) return;
+        
+            const formData = new FormData();
+            formData.append('profile_picture', file);
+        
+            fetch('upload_profile_picture.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.json())
+            .then(result => {
+                if (result.success) {
+                    alert('Profile picture updated!');
+                    location.reload(); // reload page to show new picture
+                } else {
+                    alert(result.error);
+                }
+            });
+        });
+    </script>
+        
 </body>
 </html>

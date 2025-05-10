@@ -3,7 +3,7 @@ session_start();
 include 'conn.php';
 
 if (!isset($_SESSION['user_id'])) {
-    die("Error: User is not logged in.");
+    die(json_encode(['error' => 'User is not logged in.']));
 }
 
 $userId = $_SESSION['user_id'];
@@ -15,7 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $friendHabits = $_POST['friendHabits'] ?? '';
 
     if (empty($friendEmail) || empty($friendName)) {
-        die("Error: Name and email are required.");
+        echo json_encode(['error' => 'Name and email are required.']);
+        exit;
     }
 
     // Try to find the friend's user ID based on their email
@@ -34,14 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param("iis", $userId, $friendId, $friendEmail);
 
         if ($stmt->execute()) {
-            header('Location: friendlist.html');
-            exit;
+            echo json_encode(['success' => true]);
         } else {
-            die("Error inserting friend: " . $stmt->error);
+            echo json_encode(['error' => 'Error inserting friend: ' . $stmt->error]);
         }
-
     } else {
-        echo "Error: This email is not registered.";
+        echo json_encode(['error' => 'This email is not registered.']);
     }
+    exit;
 }
 ?>
