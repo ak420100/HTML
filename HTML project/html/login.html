@@ -46,6 +46,7 @@
                 message.textContent = data.success;
                 message.classList.remove('error-msg');
                 message.classList.add('success-msg');
+                // Redirect after setting session
                 setTimeout(() => window.location.href = 'index1.php', 1000);
             } else {
                 message.textContent = data.error;

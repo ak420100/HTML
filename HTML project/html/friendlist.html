@@ -43,30 +43,42 @@
     </div>
 </div>
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    fetchFriends();
-});
 
-function fetchFriends() {
-    fetch('loadfriends.php')
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      fetchFriends();
+    });
+  
+    function fetchFriends() {
+      fetch('loadfriends.php')
         .then(response => response.json())
         .then(friends => {
-            const table = document.getElementById('friendsList');
-            table.innerHTML = '';
-            friends.forEach(friend => {
-                const row = `<tr>
-                    <td>${friend.friend_id}</td>
-                    <td>${friend.email}</td>
-                    <td>--</td> <!-- No habits for now -->
-                </tr>`;
-                table.innerHTML += row;
+          const table = document.getElementById('friendsList');
+          table.innerHTML = '';
+  
+          friends.forEach(friend => {
+            const row = document.createElement('tr');
+  
+            row.innerHTML = `
+              <td>${friend.friend_id}</td>
+              <td>${friend.email}</td>
+              <td><button class="view-habits-btn" data-id="${friend.friend_id}">View Habits</button></td>
+            `;
+  
+            table.appendChild(row);
+  
+            // ✅ Redirect to friend's progress page
+            row.querySelector('.view-habits-btn').addEventListener('click', function () {
+              const friendId = this.dataset.id;
+              window.location.href = `friend_progress.html?friend_id=${friendId}`;
             });
+          });
         })
         .catch(error => console.error('Error loading friends:', error));
-}
-
-</script>
+    }
+  </script>
+  
+    
 <script src="loadSettings.js"></script>
 
 

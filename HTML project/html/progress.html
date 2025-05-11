@@ -16,11 +16,15 @@
   </header>
 
   <main class="progress-main">
+    <div id="messageBar" style="display:none; text-align:center; padding:10px; font-weight:bold;"></div>
+
     <section class="progress-visual-section">
       <h2>Your Habits</h2>
-      <div id="progressContainer">Loading progress...</div>
+      <div id="progressContainer" class="progress-cards"></div>
     </section>
   </main>
+  
+  
 
   <footer class="progress-footer">
     <p>&copy; 2025 Habit Tracker</p>
@@ -32,32 +36,66 @@
       .then(data => {
         const container = document.getElementById('progressContainer');
         container.innerHTML = '';
-
+  
         if (data.error) {
-          container.innerHTML = '<p>' + data.error + '</p>';
+          container.innerHTML = `<p>${data.error}</p>`;
           return;
         }
-
+  
         data.forEach(habit => {
           const wrapper = document.createElement('div');
           wrapper.className = 'progress-wrapper';
-
+          wrapper.style.cursor = 'pointer';
+  
           const title = document.createElement('p');
-          title.textContent = `${habit.name}: ${habit.current} / ${habit.total} (${habit.percent}%)`;
-
+          const emoji = habit.percent === 100 ? '🎉' : habit.percent >= 50 ? '🔥' : '🌱';
+          title.textContent = `${emoji} ${habit.name}: ${habit.current} / ${habit.total} (${habit.percent}%)`;
+  
           const barOuter = document.createElement('div');
           barOuter.className = 'progress-bar-outer';
-
+  
           const barInner = document.createElement('div');
           barInner.className = 'progress-bar-inner';
-          barInner.style.width = habit.percent + '%';
-
+          setTimeout(() => {
+            barInner.style.width = habit.percent + '%';
+          }, 100);
+  
           barOuter.appendChild(barInner);
           wrapper.appendChild(title);
           wrapper.appendChild(barOuter);
           container.appendChild(wrapper);
+  
+          // ✅ Handle click to increment progress
+          wrapper.addEventListener('click', () => {
+            fetch('increment_progress.php', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ habit: habit.name })
+            })
+              .then(res => res.json())
+              .then(response => {
+                if (response.success) {
+                const messageBar = document.getElementById('messageBar');
+                  // ✅ Update the progress immediately
+                  const newPercent = response.percent;
+                  const newCurrent = response.progress;
+                  title.textContent = `${emoji} ${habit.name}: ${newCurrent} / ${habit.total} (${newPercent}%)`;
+                  barInner.style.width = newPercent + '%';
+  
+                  alert(response.success);
+                } else {
+                  alert(response.error);
+                }
+              })
+              .catch(err => {
+                alert('Something went wrong.');
+                console.error(err);
+              });
+          });
         });
       });
   </script>
+  
+  
 </body>
 </html>

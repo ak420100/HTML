@@ -3,6 +3,64 @@ function goToPage(page) {
     window.location.href = page;
 }
 
+function changeTheme(theme) {
+    let backgroundColor, buttonColor, textColor;
+
+    // Define theme colors
+    switch (theme) {
+        case 'pink':
+            backgroundColor = 'lightpink';
+            buttonColor = 'deeppink';
+            textColor = 'white';
+            break;
+        case 'blue':
+            backgroundColor = 'lightblue';
+            buttonColor = 'darkblue';
+            textColor = 'white';
+            break;
+        case 'green':
+            backgroundColor = 'lightgreen';
+            buttonColor = 'darkgreen';
+            textColor = 'black';
+            break;
+        case 'purple':
+            backgroundColor = 'plum';
+            buttonColor = 'purple';
+            textColor = 'white';
+            break;
+        case 'orange':
+            backgroundColor = 'orange';
+            buttonColor = 'darkorange';
+            textColor = 'black';
+            break;
+        case 'gray':
+            backgroundColor = 'lightgray';
+            buttonColor = 'gray';
+            textColor = 'black';
+            break;
+        default:
+            backgroundColor = '#ffffff';
+            buttonColor = '#000000';
+            textColor = 'black';
+    }
+
+    // Apply the theme to the website
+    document.body.style.background = backgroundColor;
+    document.body.style.color = textColor;
+
+    document.querySelectorAll('button').forEach(btn => {
+        btn.style.backgroundColor = buttonColor;
+        btn.style.color = textColor;
+    });
+
+    document.querySelector('header')?.style.backgroundColor = buttonColor;
+
+    document.querySelectorAll('.habit-block').forEach(block => {
+        block.style.backgroundColor = buttonColor;
+        block.style.color = textColor;
+    });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     // ✅ Login Form
     const loginForm = document.getElementById("LoginPage");
@@ -186,20 +244,25 @@ if (habitForm) {
 
 // ✅ rewards page
 document.addEventListener('DOMContentLoaded', () => {
+    // === Coin & Theme Logic ===
     const coinBalanceElement = document.getElementById('coin-balance');
+    const themeButtons = document.querySelectorAll('.theme-button');
     const showThemesButton = document.getElementById('show-themes-button');
     const colorThemesDiv = document.getElementById('color-themes');
-    const themeButtons = document.querySelectorAll('.theme-button');
 
+    // Initialize coin balance
     let coinBalance = parseInt(localStorage.getItem('coinBalance')) || 1000;
     coinBalanceElement.textContent = coinBalance;
 
-    // Show/Hide Themes
-    showThemesButton.addEventListener('click', () => {
-        colorThemesDiv.style.display = colorThemesDiv.style.display === 'none' ? 'block' : 'none';
-    });
+    // Toggle theme section visibility
+    if (showThemesButton && colorThemesDiv) {
+        showThemesButton.addEventListener('click', () => {
+            colorThemesDiv.style.display =
+                colorThemesDiv.style.display === 'none' ? 'block' : 'none';
+        });
+    }
 
-    // Theme Selection
+    // Theme button click handling
     themeButtons.forEach(button => {
         button.addEventListener('click', () => {
             const theme = button.dataset.theme;
@@ -211,123 +274,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 applyTheme(theme);
 
-                localStorage.setItem('coinBalance', coinBalance);
-                localStorage.setItem('selectedTheme', theme);
-
-                alert(`Theme ${theme} applied!`);
-            } else {
-                alert("Not enough coins!");
-            }
-        });
-    });
-
-    // Apply Previously Selected Theme
-    const selectedTheme = localStorage.getItem('selectedTheme');
-    if (selectedTheme) {
-        applyTheme(selectedTheme);
-    }
-
-    // Function to Apply Theme
-    function applyTheme(theme) {
-        let backgroundColor, buttonColor;
-
-        switch (theme) {
-            case 'pink':
-                backgroundColor = 'lightpink';
-                buttonColor = 'deeppink';
-                break;
-            case 'blue':
-                backgroundColor = 'lightblue';
-                buttonColor = 'darkblue';
-                break;
-            case 'green':
-                backgroundColor = 'lightgreen';
-                buttonColor = 'darkgreen';
-                break;
-            case 'purple':
-                backgroundColor = 'plum';
-                buttonColor = 'purple';
-                break;
-            case 'orange':
-                backgroundColor = 'orange';
-                buttonColor = 'darkorange';
-                break;
-            case 'gray':
-                backgroundColor = 'lightgray';
-                buttonColor = 'gray';
-                break;
-            default:
-                backgroundColor = '#4facfe';
-                buttonColor = '#007bff';
-        }
-
-        document.body.style.background = `linear-gradient(to right, ${backgroundColor}, ${backgroundColor})`; // Set background gradient
-        document.querySelectorAll('button').forEach(btn => {
-            btn.style.backgroundColor = buttonColor;
-        });
-        document.querySelector('header').style.backgroundColor = buttonColor;
-        document.querySelectorAll('.habit-block').forEach(block => {
-            block.style.backgroundColor = buttonColor;
-        });
-    }
-});
-
-document.querySelector('form').addEventListener('submit', async function (event) {
-    event.preventDefault(); // Prevent the form from submitting normally
-
-    const formData = new FormData(this);
-    const response = await fetch(this.action, {
-        method: 'POST',
-        body: formData
-    });
-
-    const result = await response.json();
-
-    // Clear any previous error messages
-    document.querySelectorAll('.error-message').forEach(el => el.remove());
-
-    if (result.error) {
-        const emailInput = document.querySelector('input[name="friendEmail"]');
-        const errorMessage = document.createElement('div');
-        errorMessage.className = 'error-message';
-        errorMessage.style.color = 'red';
-        errorMessage.style.fontSize = '0.9em';
-        errorMessage.textContent = result.error;
-
-        // Insert the error message after the email input
-        emailInput.parentNode.insertBefore(errorMessage, emailInput.nextSibling);
-    } else if (result.success) {
-        alert('Friend request sent successfully!');
-        location.reload(); // Reload the page or handle success as needed
-    }
-});
-
-
-//rewards page 
-
-document.addEventListener('DOMContentLoaded', () => {
-    const coinBalanceElement = document.getElementById('coin-balance');
-    const themeButtons = document.querySelectorAll('.theme-button');
-
-    // Initialize coin balance (you can replace this with a server-side value if needed)
-    let coinBalance = parseInt(localStorage.getItem('coinBalance')) || 1000;
-    coinBalanceElement.textContent = coinBalance;
-
-    // Theme Selection
-    themeButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const theme = button.dataset.theme;
-            const cost = parseInt(button.dataset.cost);
-
-            if (coinBalance >= cost) {
-                // Deduct coins and update balance
-                coinBalance -= cost;
-                coinBalanceElement.textContent = coinBalance;
-
-                // Apply the selected theme
-                applyTheme(theme);
-
-                // Save the updated balance and theme in localStorage
                 localStorage.setItem('coinBalance', coinBalance);
                 localStorage.setItem('selectedTheme', theme);
 
@@ -338,51 +284,53 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Apply Previously Selected Theme
+    // Apply previously selected theme
     const selectedTheme = localStorage.getItem('selectedTheme');
     if (selectedTheme) {
         applyTheme(selectedTheme);
     }
 
-    // Function to Apply Theme
+    // Theme application function
     function applyTheme(theme) {
-        let backgroundColor, buttonColor;
-
-        switch (theme) {
-            case 'pink':
-                backgroundColor = 'lightpink';
-                buttonColor = 'deeppink';
-                break;
-            case 'blue':
-                backgroundColor = 'lightblue';
-                buttonColor = 'darkblue';
-                break;
-            case 'green':
-                backgroundColor = 'lightgreen';
-                buttonColor = 'darkgreen';
-                break;
-            case 'purple':
-                backgroundColor = 'plum';
-                buttonColor = 'purple';
-                break;
-            case 'orange':
-                backgroundColor = 'orange';
-                buttonColor = 'darkorange';
-                break;
-            case 'gray':
-                backgroundColor = 'lightgray';
-                buttonColor = 'gray';
-                break;
-            default:
-                backgroundColor = '#ffffff';
-                buttonColor = '#000000';
+        if (typeof changeTheme === 'function') {
+            changeTheme(theme);
+        } else {
+            console.warn('changeTheme function is not defined.');
         }
+    }
 
-        // Apply the theme to the website
-        document.body.style.background = backgroundColor;
-        document.querySelectorAll('button').forEach(btn => {
-            btn.style.backgroundColor = buttonColor;
+    // === Friend Request Form Handling ===
+    const form = document.querySelector('form');
+    if (form) {
+        form.addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+            const response = await fetch(this.action, {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            // Clear previous error messages
+            document.querySelectorAll('.error-message').forEach(el => el.remove());
+
+            if (result.error) {
+                const emailInput = document.querySelector('input[name="friendEmail"]');
+                const errorMessage = document.createElement('div');
+                errorMessage.className = 'error-message';
+                errorMessage.style.color = 'red';
+                errorMessage.style.fontSize = '0.9em';
+                errorMessage.textContent = result.error;
+
+                if (emailInput && emailInput.parentNode) {
+                    emailInput.parentNode.insertBefore(errorMessage, emailInput.nextSibling);
+                }
+            } else if (result.success) {
+                alert('Friend request sent successfully!');
+                location.reload();
+            }
         });
-        document.querySelector('header')?.style.backgroundColor = buttonColor;
     }
 });

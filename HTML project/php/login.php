@@ -1,7 +1,6 @@
 <?php
 session_start();
 include 'conn.php';
-$_SESSION['username'] = $username; 
 header('Content-Type: application/json');
 
 // Handle only POST requests

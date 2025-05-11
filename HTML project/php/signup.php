@@ -1,5 +1,6 @@
 <?php
 include 'conn.php';
+session_start();
 
 header('Content-Type: application/json');
 
@@ -42,6 +43,8 @@ $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?,
 $stmt->bind_param("sss", $username, $email, $hashedPassword);
 
 if ($stmt->execute()) {
+    // Set user_id in session after successful signup
+    $_SESSION['user_id'] = $stmt->insert_id;
     echo json_encode(["success" => "Signup successful! Redirecting..."]);
 } else {
     echo json_encode(["error" => "Database error: " . $stmt->error]);

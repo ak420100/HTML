@@ -6,21 +6,45 @@
     <title>Signup</title> <!-- Corrected title -->
     <link rel="stylesheet" href="signup.css"> <!-- Link to CSS -->
     <link rel="stylesheet" href="theme.css">
-    <link rel="stylesheet" href="settings.css">
+    <link rel="stylesheet" href="settinedgs.css">
 </head>
 <body>
-    <div class="SignupContainer" action="/signup.php" method="POST">
+    <div class="SignupContainer">
         <h1 class="Title">Signup</h1>
-        <form id="signupForm">
+        <form id="signupForm" action="/signup.php" method="POST">
             <input type="text" id="username" name="username" placeholder="Enter Username" required>
             <input type="email" id="email" name="email" placeholder="Enter Email" required>
             <input type="password" id="password" name="password" placeholder="Enter Password" required>
             <button type="submit">Sign Up</button>
         </form>
         <p id="responseMessage"></p>
+        <p id="errorMessage" style="color: red; display: none;"></p> <!-- Placeholder for error message -->
     </div>
-    
     <script src="script.js"></script>
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', async function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const formData = new FormData(this);
+            const response = await fetch(this.action, {
+                method: this.method,
+                body: formData,
+            });
+
+            const result = await response.json();
+            const errorMessage = document.getElementById('errorMessage');
+
+            if (result.error) {
+                errorMessage.textContent = result.error; // Display error message
+                errorMessage.style.display = 'block';
+            } else {
+                errorMessage.style.display = 'none';
+                document.getElementById('responseMessage').textContent = 'Signup successful!';
+                // Redirect to index1.php after successful signup
+                setTimeout(() => window.location.href = 'index1.php', 1000);
+            }
+        });
+    </script>
 </body>
 <script src="loadSettings.js"></script>
 

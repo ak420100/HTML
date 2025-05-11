@@ -57,6 +57,62 @@ body.dark-mode {
 }
 
 
+body.pink-theme {
+    background-color: lightpink;
+    color: white;
+}
 
+body.pink-theme button {
+    background-color: deeppink;
+    color: white;
+}
 
+body.blue-theme {
+    background-color: lightblue;
+    color: white;
+}
 
+body.blue-theme button {
+    background-color: darkblue;
+    color: white;
+}
+
+body.green-theme{
+    background-color: green;
+    color: white;
+}
+
+body.green-theme button{
+    background-color: darkgreen;
+    color: white;
+}
+
+body.purple-theme{
+    background-color: purple;
+    color: white;
+}
+
+body.purple-theme button{
+    background-color: darkviolet;
+    color: white;
+}
+
+body.orange-theme{
+    background-color: orange;
+    color: white;
+}
+
+body.orange-theme button{
+    background-color: darkorange;
+    color: white;
+}
+
+body.grey-theme{
+    background-color: grey;
+    color: white;
+}
+
+body.grey-theme button{
+    background-color: darkgrey;
+    color: white;
+}

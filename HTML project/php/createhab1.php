@@ -56,3 +56,35 @@ if (!isset($_SESSION['user_id'])) {
 
 </body>
 </html>
+
+<?php
+// Backend Script for Creating a Habit (Assuming `createhab1.php`)
+
+// Check if the user is logged in
+if (!isset($_SESSION['user_id'])) {
+    echo json_encode(['error' => 'You must be logged in to create a habit.']);
+    exit();
+}
+
+// Example: Insert habit into the database
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $habit_name = $_POST['habit_name'] ?? '';
+    $duration = $_POST['duration'] ?? '';
+
+    if (empty($habit_name) || empty($duration)) {
+        echo json_encode(['error' => 'Habit name and duration are required.']);
+        exit();
+    }
+
+    // Assuming a database connection is already established
+    $user_id = $_SESSION['user_id'];
+    $stmt = $db->prepare('INSERT INTO habits (user_id, habit_name, duration, created_at) VALUES (?, ?, ?, NOW())');
+    $stmt->bind_param('iss', $user_id, $habit_name, $duration);
+
+    if ($stmt->execute()) {
+        echo json_encode(['success' => 'Habit created successfully.']);
+    } else {
+        echo json_encode(['error' => 'Failed to create habit.']);
+    }
+}
+?>
