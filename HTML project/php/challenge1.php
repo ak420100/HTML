@@ -1,3 +1,13 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$user_id = $_SESSION['user_id'];
+$theme = isset($_SESSION['theme']) ? $_SESSION['theme'] : '';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,7 +72,7 @@
     }
   </style>
 </head>
-<body>
+<body class="<?php echo htmlspecialchars($theme . '-theme'); ?>">
   <header class="challenge-header">
     <h1>Habit Challenge</h1>
     <p>See who reaches the goal first 💪</p>
@@ -124,5 +134,6 @@
         document.getElementById('resultText').textContent = "Failed to load challenge data.";
       });
   </script>
+  <script src="loadTheme.js"></script>
 </body>
 </html>

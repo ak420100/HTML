@@ -1,3 +1,15 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$user_id = $_SESSION['user_id'];
+$username = $_SESSION['username'];
+$theme = isset($_SESSION['theme']) ? $_SESSION['theme'] : '';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +22,7 @@
 <body>
   <header class="progress-header">
     <h1>Friend's Habit Progress</h1>
-    <nav><a href="friendlist.html">Back to Friends</a></nav>
+    <nav><a href="friendlist1.php">Back to Friends</a></nav>
   </header>
 
   <main class="progress-main">
@@ -67,7 +79,7 @@
             challengeBtn.addEventListener('click', () => {
                 const urlParams = new URLSearchParams(window.location.search);
                 const friendId = urlParams.get('friend_id');
-                window.location.href = `challenge.html?friend_id=${friendId}&habit=${encodeURIComponent(habit.name)}`;
+                window.location.href = `challenge1.php?friend_id=${friendId}&habit=${encodeURIComponent(habit.name)}`;
             });
 
             wrapper.appendChild(title);

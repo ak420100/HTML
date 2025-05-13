@@ -1,3 +1,14 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$user_id = $_SESSION['user_id'];
+$theme = isset($_SESSION['theme']) ? $_SESSION['theme'] : '';
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,14 +21,13 @@
     <link rel="stylesheet" href="settings.css"> <!-- or another page-specific CSS -->
 
 </head>
-<body>
+<body class="<?php echo htmlspecialchars($theme . '-theme'); ?>">
     <header class="account-header-section">
         <h1>Habit Tracker</h1>
         <nav class="nav-section">
             <ul class="account-links">
-                <li class="account-item"><a href="index1.html">Home</a></li>
+                <li class="account-item"><a href="index1.php">Home</a></li>
                 <li class="account-item"><a href="logout.html">Logout</a></li>
-                <li class="account-item"><a href="profile.html">Profile</a></li>
             </ul>
         </nav>
     </header>
@@ -61,17 +71,7 @@
                 <button type="submit">Update</button>
             </form>
         </section>
-        
-        <section id="account-habit-list" class="habit-list-section">
-            <h2>Your Habits</h2>
-            <ul>
-                <li>Exercise</li>
-                <li>Read</li>
-                <li>Meditate</li>
-                <li>Drink Water</li>
-                <li>Wake Up Early</li>
-            </ul>
-        </section>
+
 
         <section id="account-habit-update" class="habit-update-section">
     <h2>Update Your Habits</h2>
@@ -185,6 +185,6 @@
             });
         });
     </script>
-        
+    <script src="loadTheme.js"></script>
 </body>
 </html>

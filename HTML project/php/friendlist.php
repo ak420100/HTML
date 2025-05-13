@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode(['error' => 'Error inserting friend: ' . $stmt->error]);
         }
     } else {
-        echo json_encode(['error' => 'This email is not registered.']);
+        echo json_encode(['error' => 'This email is not registered.', 'field' => 'friendEmail']);
     }
     exit;
 }

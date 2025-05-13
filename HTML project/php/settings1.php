@@ -1,3 +1,14 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$user_id = $_SESSION['user_id'];
+$theme = isset($_SESSION['theme']) ? $_SESSION['theme'] : '';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +16,7 @@
   <title>Settings</title>
   <link rel="stylesheet" href="settings.css">
 </head>
-<body>
+<body class="<?php echo htmlspecialchars($theme . '-theme'); ?>">
   <div class="settings-container">
     <h1>User Settings</h1>
     <form id="settingsForm">
@@ -85,5 +96,6 @@
         });
     });
   </script>
+  <script src="loadTheme.js"></script>
 </body>
 </html>

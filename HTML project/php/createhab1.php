@@ -4,13 +4,15 @@ if (!isset($_SESSION['user_id'])) {
     echo '<div class="alert">You must <a href="login.html">sign in</a> to create a habit.</div>';
     exit;
 }
+
+$theme = isset($_SESSION['theme']) ? $_SESSION['theme'] : '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <a href="index1.php" id="logo">Trabit</a>
+   
     <title>Create New Habit</title>
     <link rel="stylesheet" href="createhabstyle.css">
     <link rel="stylesheet" href="theme.css">
@@ -53,7 +55,7 @@ if (!isset($_SESSION['user_id'])) {
     </form>
 </div>
 <script src="loadSettings.js"></script>
-
+<script src="loadTheme.js"></script>
 </body>
 </html>
 

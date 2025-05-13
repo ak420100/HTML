@@ -38,22 +38,37 @@ if (!$stmt->execute()) {
 
 // Optional: Update user's habits if habit data is sent
 if (isset($data['habits']) && is_array($data['habits'])) {
-    // Delete existing habits
-    $conn->query("DELETE FROM habits WHERE user_id = $user_id");
+    // Delete existing habits using a prepared statement
+    $delete_stmt = $conn->prepare("DELETE FROM habits WHERE user_id = ?");
+    $delete_stmt->bind_param("i", $user_id);
+    if (!$delete_stmt->execute()) {
+        echo json_encode(["error" => "Failed to delete existing habits."]);
+        $delete_stmt->close();
+        $conn->close();
+        exit;
+    }
+    $delete_stmt->close();
 
-    // Insert new habits
-    $stmt = $conn->prepare("INSERT INTO habits (user_id, habit_name) VALUES (?, ?)");
+    // Insert new habits using a prepared statement
+    $insert_stmt = $conn->prepare("INSERT INTO habits (user_id, name) VALUES (?, ?)");
+    if (!$insert_stmt) {
+        echo json_encode(["error" => "Failed to prepare habit insertion statement."]);
+        $conn->close();
+        exit;
+    }
+
     foreach ($data['habits'] as $habit) {
         if (!empty($habit)) {
-            $stmt->bind_param("is", $user_id, $habit);
-            if (!$stmt->execute()) {
+            $insert_stmt->bind_param("is", $user_id, $habit);
+            if (!$insert_stmt->execute()) {
                 echo json_encode(["error" => "Failed to insert habit: $habit"]);
-                $stmt->close();
+                $insert_stmt->close();
                 $conn->close();
                 exit;
-            } 
+            }
         }
     }
+    $insert_stmt->close();
 }
 
 echo json_encode(["success" => "Account updated successfully."]);

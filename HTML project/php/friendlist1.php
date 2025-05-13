@@ -1,3 +1,15 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$user_id = $_SESSION['user_id'];
+$theme = isset($_SESSION['theme']) ? $_SESSION['theme'] : '';
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,14 +20,15 @@
     <link rel="stylesheet" href="theme.css">
     <link rel="stylesheet" href="settings.css">
 </head>
-<body>
+<body class="<?php echo htmlspecialchars($theme . '-theme'); ?>">
 
-<a href="index.html" id="logo">Trabit</a>
+
 
 <div class="container">
     <h1 class="friendsTitle">Your Friends</h1>
     <div class="friendContainer">
-        <form id="friendForm" action="friendlist.php" method="POST" class="addFriendForm">
+        <form id="friendForm" class="addFriendForm">
+
             <label for="friendName">Name:</label>
             <input type="text" id="friendName" name="friendName" required>
 
@@ -70,17 +83,42 @@
             // ✅ Redirect to friend's progress page
             row.querySelector('.view-habits-btn').addEventListener('click', function () {
               const friendId = this.dataset.id;
-              window.location.href = `friend_progress.html?friend_id=${friendId}`;
+              window.location.href = `friendprogress1.php?friend_id=${friendId}`;
             });
           });
         })
         .catch(error => console.error('Error loading friends:', error));
     }
+    document.getElementById('friendForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // ⛔ Stop the default form submission
+
+        const formData = new FormData(this);
+
+        fetch('friendlist.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(res => res.json())
+        .then(result => {
+            if (result.success) {
+                alert("✅ Friend added successfully!");
+                fetchFriends(); // Refresh the table
+                document.getElementById('friendForm').reset();
+            } else {
+                alert("❌ " + (result.error || "Something went wrong."));
+            }
+        })
+        .catch(error => {
+            console.error("Error adding friend:", error);
+            alert("❌ Failed to add friend.");
+        });
+    });
+
   </script>
   
     
 <script src="loadSettings.js"></script>
-
+<script src="loadTheme.js"></script>
 
 </body>
 </html>

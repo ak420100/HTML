@@ -39,5 +39,34 @@ body {
     border: 1px solid #555;
   }
   
+  body.pink-theme {
+    background: linear-gradient(to right, #ffafbd, #ffc3a0);
+  }
+  
+  body.blue-theme {
+    background: linear-gradient(to right, #2193b0, #6dd5ed);
+  }
+  
+  body.green-theme {
+    background: linear-gradient(to right, #56ab2f, #a8e063);
+  }
+  
+  body.purple-theme {
+    background: linear-gradient(to right, #8e2de2, #4a00e0);
+  }
+  
+  body.orange-theme {
+    background: linear-gradient(to right, #f7971e, #ffd200);
+  }
+  
+  body.gray-theme {
+    background: linear-gradient(to right, #bdc3c7, #2c3e50);
+  }
+
+body[class^="theme-"] {
+    transition: background 0.4s ease-in-out;
+    background-repeat: no-repeat;
+    background-size: cover !important;
+}
   /* You can add more global elements here later */
   

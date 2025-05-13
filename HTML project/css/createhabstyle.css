@@ -83,6 +83,71 @@ button:hover {
 /*Logo button*/
  #logo {
     color: green;
-    font-size: 1000px;
+    font-size: 100px;
 
 }
+
+
+body.pink-theme button {
+    background-color: deeppink;
+    color: white;
+}
+
+body.blue-theme button {
+    background-color: darkblue;
+    color: white;
+}
+
+
+body.green-theme button{
+    background-color: darkgreen;
+    color: white;
+}
+
+
+body.purple-theme button{
+    background-color: darkviolet;
+    color: white;
+}
+
+
+body.orange-theme button{
+    background-color: darkorange;
+    color: white;
+}
+
+
+body.grey-theme button{
+    background-color: darkgrey;
+    color: white;
+}
+
+body.theme-pink {
+    background: linear-gradient(to right, #ffafbd, #ffc3a0);
+  }
+  
+  body.theme-blue {
+    background: linear-gradient(to right, #2193b0, #6dd5ed);
+  }
+  
+  body.theme-green {
+    background: linear-gradient(to right, #56ab2f, #a8e063);
+  }
+  
+  body.theme-purple {
+    background: linear-gradient(to right, #8e2de2, #4a00e0);
+  }
+  
+  body.theme-orange {
+    background: linear-gradient(to right, #f7971e, #ffd200);
+  }
+  
+  body.theme-gray {
+    background: linear-gradient(to right, #bdc3c7, #2c3e50);
+  }
+
+/* body[class^="theme-"] {
+    transition: background 0.4s ease-in-out;
+    background-repeat: no-repeat;
+    background-size: cover !important;
+} */

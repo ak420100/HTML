@@ -1,3 +1,15 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$user_id = $_SESSION['user_id'];
+$username = $_SESSION['username'];
+$theme = isset($_SESSION['theme']) ? $_SESSION['theme'] : '';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,8 +25,8 @@
         <h1>Habit Tracker</h1>
         <nav class="nav-section">
             <ul class="account-links">
-                <li class="account-item"><a href="index.html">Home</a></li>
-                <li class="account-item"><a href="account.html">Account</a></li>
+                <li class="account-item"><a href="index1.php">Home</a></li>
+                <li class="account-item"><a href="account1.php">Account</a></li>
                 <li class="account-item"><a href="logout.html">Logout</a></li>
             </ul>
         </nav>
