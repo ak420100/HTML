@@ -1,6 +1,6 @@
 <?php
 // filepath: vsls:/load_user_settings.php
-<?php
+
 session_start();
 include 'conn.php';
 
@@ -23,4 +23,3 @@ $conn->close();
 
 // Return dark mode preference
 echo json_encode(["dark_mode" => $dark_mode]);
-?>

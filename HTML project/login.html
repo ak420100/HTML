@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login </title> <!-- Corrected title -->
+    <link rel="stylesheet" href="signup.css"> <!-- Link to CSS -->
+</head>
+<body>
+    <div>
+        <form class="SignupContainer" id="LoginPage" action="/login.php" method="POST">
+            <h1 class="Title">Login</h1>
+            <input type="email" id="email" name="email" placeholder="Enter Email" required>
+            <input type="password" id="password" name="password" placeholder="Enter Password" required>
+            <button type="submit">Login</button>
+            <p id="responseMessage" style="color: red;"></p>
+            <!-- Removed "Go to Signup" button -->
+            <div>
+                <p style="font-size: 14px;">
+                    Don't have an account? <a href="signup.html" style="color: white; text-decoration: none;">Sign up here</a>.
+                </p>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        function handleLogin(event) {
+            event.preventDefault(); // Prevent form submission for demonstration
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Simulate a backend response (replace this with actual backend validation)
+            if (email !== "test@example.com" || password !== "password123") {
+                document.getElementById('responseMessage').textContent = "Wrong username or password.";
+                return false;
+            }
+
+            // If login is successful, submit the form
+            event.target.submit();
+        }
+    </script>
+</body>
+</html>

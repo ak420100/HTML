@@ -1,0 +1,185 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+  }
+  
+  .settings-container {
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    width: 340px;
+    text-align: center;
+  }
+  
+  .settings-container h1 {
+    font-size: 26px;
+    margin-bottom: 30px;
+    color: #fff;
+  }
+  
+  .toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 12px 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 16px;
+  }
+  
+  .toggle input {
+    display: none;
+  }
+  
+  .slider {
+    position: relative;
+    width: 40px;
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 20px;
+    transition: 0.4s;
+  }
+  
+  .slider::before {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    left: 1px;
+    top: 1px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+  }
+  
+  .toggle input:checked + .slider {
+    background-color: #4caf50;
+  }
+  
+  .toggle input:checked + .slider::before {
+    transform: translateX(20px);
+  }
+  
+  .label-text {
+    flex-grow: 1;
+    text-align: left;
+    margin-left: 15px;
+  }
+  
+  button {
+    background-color: #fff;
+    color: #00bcd4;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  button:hover {
+    background-color: #e0f7fa;
+  }
+  
+  #statusMessage {
+    margin-top: 15px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  /* Dark mode styles */
+body.dark-mode {
+  background: #121212;
+  color: #ffffff;
+}
+
+.settings-container.dark-mode {
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1);
+}
+
+button.dark-mode {
+  background-color: #333;
+  color: #fff;
+}
+
+button.dark-mode:hover {
+  background-color: #444;
+}
+
+
+body.pink-theme button {
+  background-color: deeppink;
+  color: white;
+}
+
+body.blue-theme button {
+  background-color: darkblue;
+  color: white;
+}
+
+
+body.green-theme button{
+  background-color: darkgreen;
+  color: white;
+}
+
+
+body.purple-theme button{
+  background-color: darkviolet;
+  color: white;
+}
+
+
+body.orange-theme button{
+  background-color: darkorange;
+  color: white;
+}
+
+
+body.grey-theme button{
+  background-color: darkgrey;
+  color: white;
+}
+
+body.theme-pink {
+  background: linear-gradient(to right, #ffafbd, #ffc3a0);
+}
+
+body.theme-blue {
+  background: linear-gradient(to right, #2193b0, #6dd5ed);
+}
+
+body.theme-green {
+  background: linear-gradient(to right, #56ab2f, #a8e063);
+}
+
+body.theme-purple {
+  background: linear-gradient(to right, #8e2de2, #4a00e0);
+}
+
+body.theme-orange {
+  background: linear-gradient(to right, #f7971e, #ffd200);
+}
+
+body.theme-gray {
+  background: linear-gradient(to right, #bdc3c7, #2c3e50);
+}
+
+body[class^="theme-"] {
+  transition: background 0.4s ease-in-out;
+  background-repeat: no-repeat;
+  background-size: cover !important;
+}

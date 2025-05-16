@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #6a11cb 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white; /* Default text color to white for better contrast */
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+    backdrop-filter: blur(10px); /* Blur background behind */
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    text-align: center;
+    width: 500px; /* Increase width of the container */
+    padding: 30px; /* Increase padding for the container */
+    border-radius: 10px; /* Smooth edges */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Light border */
+}
+
+.friendsTitle {
+    color: white;
+    font-size: 36px; /* Increase font size */
+    font-weight: bold;
+    margin-bottom: 30px; /* Increase margin below the title */
+    text-align: center; /* Center the title */
+}
+
+.friendsTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.friendsTable th, .friendsTable td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.friendsTable th {
+    background-color: #28a745; /* Adjust as needed */
+    color: white;
+}
+
+.friendsTable tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+}
+
+.friendsTable tr:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.addFriendForm {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: flex-start; /* Align elements to the left */
+    gap: 10px; /* Add spacing between form elements */
+    margin-bottom: 20px; /* Add spacing below the form */
+}
+
+.addFriendForm label {
+    font-weight: bold;
+    margin-bottom: 5px; /* Add spacing below labels */
+}
+
+.addFriendForm input {
+    width: 100%; /* Make input fields take full width */
+    padding: 8px; /* Add padding inside input fields */
+    border: 1px solid #ddd; /* Add a light border */
+    border-radius: 5px; /* Smooth edges */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.addFriendForm button {
+    align-self: center; /* Center the button */
+    padding: 10px 20px; /* Add padding to the button */
+    background-color: #28a745; /* Green background */
+    color: white; /* White text */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Smooth edges */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    font-size: 16px; /* Increase font size */
+}
+
+.addFriendForm button:hover {
+    background-color: #218838; /* Darker green on hover */
+}

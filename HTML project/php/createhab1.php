@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 if (!isset($_SESSION['user_id'])) {
     echo '<div class="alert">You must <a href="login.html">sign in</a> to create a habit.</div>';

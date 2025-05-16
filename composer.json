@@ -1,0 +1,17 @@
+{
+    "name": "ak/html-project",
+    "description": "A habit-tracking web application with visual progress, rewards, and social features.",
+    "autoload": {
+        "psr-4": {
+            "Ak\\HtmlProject\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Anwar"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^12.1"
+    }
+}

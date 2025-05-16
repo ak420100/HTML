@@ -1,0 +1,369 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+h1,
+h2 {
+    color: white;
+}
+
+/* Header Section */
+.account-header-section {
+    background-color: #1e3c72;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.account-header-section h1 {
+    margin: 0;
+}
+
+.nav-section {
+    margin-top: 10px;
+}
+
+.nav-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.nav-section a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.nav-section a:hover {
+    text-decoration: underline;
+}
+
+/* Account Info Section */
+#account-info {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#account-info h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.profile-picture-section {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.profile-picture {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+}
+
+.account-details {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+.account-details p {
+    margin: 8px 0;
+}
+
+.account-details strong {
+    color: #333;
+}
+
+.account-info-update-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.account-info-update-section h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.profile-picture-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-picture {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.upload-button {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #0d47a1;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.upload-button:hover {
+    background-color: #0d47a1;
+}
+
+/* Account Info update Section */
+.account-info-update-section {
+    margin-bottom: 30px;
+}
+
+.account-info-update-section h2 {
+    margin-bottom: 15px;
+}
+
+#account-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#account-form label {
+    font-weight: bold;
+}
+
+#account-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+#account-form button {
+    padding: 10px 20px;
+    background-color: #0d47a1;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#account-form button:hover {
+    background-color: #0d47a1;
+}
+
+/* Account Habit Section */
+#account-habit-list {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#account-habit-list:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+#account-habit-list h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#account-habit-list ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#account-habit-list li {
+    font-size: 1rem;
+    color: #555;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#account-habit-list li:last-child {
+    border-bottom: none;
+}
+
+#account-habit-list li:hover {
+    background-color: #f0f0f0;
+    color: #333;
+    cursor: pointer;
+}
+
+/*update habit section*/
+#account-habit-update {
+    background-color: transparent;
+    padding: 0;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+#account-habit-update h2 {
+    font-size: 2rem;
+    color: #0d47a1;
+    margin-bottom: 20px;
+    text-align: left;
+    border-bottom: 2px solid #0d47a1;
+    padding-bottom: 5px;
+}
+
+#habit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#habit-form label {
+    font-size: 1rem;
+    color: #333;
+    font-weight: bold;
+}
+
+#habit-form input {
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    background-color: transparent;
+    color: #333;
+    transition: border-color 0.3s ease;
+}
+
+#habit-form input:focus {
+    border-color: #0d47a1;
+    outline: none;
+}
+
+#habit-form button {
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    color: #fff;
+    background-color: #0d47a1;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#habit-form button:hover {
+    background-color: #1565c0;
+    transform: scale(1.05);
+}
+
+#habit-form button:active {
+    transform: scale(1);
+}
+
+
+/* Footer Section */
+.account-footer-section {
+    text-align: center;
+    padding: 15px;
+    background-color: #1e3c72;
+    color: white;
+    margin-top: 30px;
+}
+
+.account-footer-section p {
+    margin: 0;
+    font-size: 14px;
+}
+
+
+
+body.pink-theme button {
+    background-color: deeppink;
+    color: white;
+}
+
+body.blue-theme button {
+    background-color: darkblue;
+    color: white;
+}
+
+
+body.green-theme button{
+    background-color: darkgreen;
+    color: white;
+}
+
+
+body.purple-theme button{
+    background-color: darkviolet;
+    color: white;
+}
+
+
+body.orange-theme button{
+    background-color: darkorange;
+    color: white;
+}
+
+
+body.grey-theme button{
+    background-color: darkgrey;
+    color: white;
+}
+
+body.theme-pink {
+    background: linear-gradient(to right, #ffafbd, #ffc3a0);
+  }
+  
+  body.theme-blue {
+    background: linear-gradient(to right, #2193b0, #6dd5ed);
+  }
+  
+  body.theme-green {
+    background: linear-gradient(to right, #56ab2f, #a8e063);
+  }
+  
+  body.theme-purple {
+    background: linear-gradient(to right, #8e2de2, #4a00e0);
+  }
+  
+  body.theme-orange {
+    background: linear-gradient(to right, #f7971e, #ffd200);
+  }
+  
+  body.theme-gray {
+    background: linear-gradient(to right, #bdc3c7, #2c3e50);
+  }
+
+body[class^="theme-"] {
+    transition: background 0.4s ease-in-out;
+    background-repeat: no-repeat;
+    background-size: cover !important;
+}

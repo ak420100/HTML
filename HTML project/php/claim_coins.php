@@ -1,5 +1,6 @@
 <?php
 include 'conn.php';
+ob_start();
 session_start();
 header('Content-Type: application/json');
 

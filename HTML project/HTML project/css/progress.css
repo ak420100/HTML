@@ -1,0 +1,138 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    min-height: 100vh;
+    color: #fff;
+  }
+  
+  .progress-header {
+    text-align: center;
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  }
+  
+  .progress-header a {
+    color: #00e5ff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .progress-main {
+    padding: 40px 20px;
+  }
+  
+  .progress-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    max-width: 700px;
+    margin: auto;
+  }
+  
+  .progress-wrapper {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(6px);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s;
+  }
+  
+  .progress-wrapper:hover {
+    transform: scale(1.02);
+  }
+  
+  .progress-wrapper p {
+    margin: 0 0 10px 0;
+    font-weight: 500;
+    font-size: 16px;
+  }
+  
+  .progress-bar-outer {
+    background-color: #333;
+    border-radius: 10px;
+    height: 24px;
+    overflow: hidden;
+  }
+  
+  .progress-bar-inner {
+    height: 100%;
+    background: linear-gradient(to right, #00e676, #00c853);
+    width: 0%;
+    transition: width 0.6s ease-in-out;
+    border-radius: 10px 0 0 10px;
+  }
+  
+  .progress-footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    opacity: 0.6;
+  }
+  
+
+  body.pink-theme button {
+    background-color: deeppink;
+    color: white;
+}
+
+body.blue-theme button {
+    background-color: darkblue;
+    color: white;
+}
+
+
+body.green-theme button{
+    background-color: darkgreen;
+    color: white;
+}
+
+
+body.purple-theme button{
+    background-color: darkviolet;
+    color: white;
+}
+
+
+body.orange-theme button{
+    background-color: darkorange;
+    color: white;
+}
+
+
+body.grey-theme button{
+    background-color: darkgrey;
+    color: white;
+}
+
+body.theme-pink {
+    background: linear-gradient(to right, #ffafbd, #ffc3a0);
+  }
+  
+  body.theme-blue {
+    background: linear-gradient(to right, #2193b0, #6dd5ed);
+  }
+  
+  body.theme-green {
+    background: linear-gradient(to right, #56ab2f, #a8e063);
+  }
+  
+  body.theme-purple {
+    background: linear-gradient(to right, #8e2de2, #4a00e0);
+  }
+  
+  body.theme-orange {
+    background: linear-gradient(to right, #f7971e, #ffd200);
+  }
+  
+  body.theme-gray {
+    background: linear-gradient(to right, #bdc3c7, #2c3e50);
+  }
+
+body[class^="theme-"] {
+    transition: background 0.4s ease-in-out;
+    background-repeat: no-repeat;
+    background-size: cover !important;
+}

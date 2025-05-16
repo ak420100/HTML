@@ -1,0 +1,153 @@
+/* General Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #6a11cb 100%); /* Gradient Background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Centered Form Container */
+.habitContainer {
+    background: rgba(255, 255, 255, 0.2); /* Glass Effect */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    text-align: center;
+    color: #fff;
+}
+
+/* Title */
+.habitContainer h1 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333
+}
+
+/* Input Fields & Select */
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+/* Placeholder Text Color */
+input::placeholder {
+    color: #666;
+}
+
+/* Labels */
+label {
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+    color: #f8f8f8;
+}
+
+/* Submit Button */
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    background: #ff6b6b;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #ee5253;
+}
+
+/* Response Message */
+#responseMessage {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #f8f8f8;
+}
+
+/*Logo button*/
+ #logo {
+    color: green;
+    font-size: 100px;
+
+}
+
+
+body.pink-theme button {
+    background-color: deeppink;
+    color: white;
+}
+
+body.blue-theme button {
+    background-color: darkblue;
+    color: white;
+}
+
+
+body.green-theme button{
+    background-color: darkgreen;
+    color: white;
+}
+
+
+body.purple-theme button{
+    background-color: darkviolet;
+    color: white;
+}
+
+
+body.orange-theme button{
+    background-color: darkorange;
+    color: white;
+}
+
+
+body.grey-theme button{
+    background-color: darkgrey;
+    color: white;
+}
+
+body.theme-pink {
+    background: linear-gradient(to right, #ffafbd, #ffc3a0);
+  }
+  
+  body.theme-blue {
+    background: linear-gradient(to right, #2193b0, #6dd5ed);
+  }
+  
+  body.theme-green {
+    background: linear-gradient(to right, #56ab2f, #a8e063);
+  }
+  
+  body.theme-purple {
+    background: linear-gradient(to right, #8e2de2, #4a00e0);
+  }
+  
+  body.theme-orange {
+    background: linear-gradient(to right, #f7971e, #ffd200);
+  }
+  
+  body.theme-gray {
+    background: linear-gradient(to right, #bdc3c7, #2c3e50);
+  }
+
+/* body[class^="theme-"] {
+    transition: background 0.4s ease-in-out;
+    background-repeat: no-repeat;
+    background-size: cover !important;
+} */
