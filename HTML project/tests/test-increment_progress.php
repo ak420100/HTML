@@ -32,7 +32,7 @@ class IncrementProgressTest extends TestCase
     private function runIncrementProgress()
     {
         ob_start();
-        include 'increment_progress.php'; // Replace with your actual PHP file name
+        include 'increment_progress.php';
         return json_decode(ob_get_clean(), true);
     }
 
