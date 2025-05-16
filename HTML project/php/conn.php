@@ -6,6 +6,7 @@ $database = "u626296519_DB"; // Your database name
 
 // Create a connection
 $conn = new mysqli($servername, $username, $password, $database);
+$GLOBALS['conn'] = $conn;
 
 // Check connection
 if ($conn->connect_error) {
