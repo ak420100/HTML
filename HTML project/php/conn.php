@@ -1,8 +1,8 @@
 <?php
-$servername = "mysql.hostinger.com"; // Hostinger's MySQL server
-$username = "u626296519_root1"; // Your database username
-$password = "DatabasePassword2!"; // Your database password
-$database = "u626296519_DB"; // Your database name
+$servername = "mysql.hostinger.com";
+$username = "u626296519_root1";
+$password = "DatabasePassword2!";
+$database = "u626296519_DB";
 
 // Create a connection
 $conn = new mysqli($servername, $username, $password, $database);
