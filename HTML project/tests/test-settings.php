@@ -105,7 +105,7 @@ class SettingsTest extends TestCase
         $this->assertEquals(['success' => 'Settings updated.'], $result);
     }
 
-    // Helper method to create a mock result for fetching settings
+    // A helper method to create a mock result for fetching settings
     private function createMockResult($data)
     {
         $result = $this->createMock(mysqli_result::class);
@@ -113,7 +113,7 @@ class SettingsTest extends TestCase
         return $result;
     }
 
-    // Helper method to mock input data
+    // A helper method to mock input data
     private function mockInput($data)
     {
         $inputStream = fopen('php://input', 'w');
