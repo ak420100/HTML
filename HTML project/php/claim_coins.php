@@ -37,4 +37,5 @@ if ($stmt->execute()) {
 } else {
     echo json_encode(['error' => 'Claim failed']);
 }
+$GLOBALS['conn'] = $conn;
 ?>

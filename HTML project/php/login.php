@@ -28,7 +28,8 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 }
 
 // Query the database
-$stmt = $conn->prepare("SELECT id, password FROM users WHERE email = ?");
+//$stmt = $conn->prepare("SELECT id, password FROM users WHERE email = ?");
+$stmt = $GLOBALS['conn']->prepare("SELECT id, password FROM users WHERE email = ?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $stmt->store_result();
