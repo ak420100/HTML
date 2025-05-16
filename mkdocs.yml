@@ -1,0 +1,13 @@
+site_name: My Docs
+
+
+nav:
+  - Home: index.md
+  - Backend: backend.md
+  - Database: database.md
+  - Frontend: frontend.md
+  - Setup: setup.md
+  - Functions: functions.md
+  - API: api.md
+  - Team: team.md
+  - Testing: testing.md
