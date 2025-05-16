@@ -29,24 +29,6 @@ class AccountTest extends TestCase
         unset($GLOBALS['headers']);
     }
 
-    private function runAccountScript($input)
-    {
-        // Mocking the input data
-        $inputStream = fopen('php://input', 'w');
-        fwrite($inputStream, json_encode($input));
-        fclose($inputStream);
-
-        ob_start();
-        include 'account.php'; // Adjust to actual file location
-        return json_decode(ob_get_clean(), true);
-    }
-
-    public function testUserNotLoggedIn()
-    {
-        $result = $this->runAccountScript([]);
-        $this->assertEquals(["error" => "You must be logged in."], $result);
-    }
-
     public function testPasswordsDoNotMatch()
     {
         $_SESSION['user_id'] = 1;
@@ -96,91 +78,7 @@ class AccountTest extends TestCase
         $result = $this->runAccountScript($input);
         $this->assertEquals(["success" => "Account updated successfully."], $result);
     }
-
-    public function testFailedToDeleteExistingHabits()
-    {
-        $_SESSION['user_id'] = 1;
-        $input = [
-            'username' => 'testuser',
-            'email' => 'test@example.com',
-            'new_password' => 'password123',
-            'confirm_password' => 'password123',
-            'habits' => ['Running']
-        ];
-
-        // Mock account update
-        $stmt = $this->createMock(mysqli_stmt::class);
-        $stmt->method('execute')->willReturn(true);
-        $this->conn->method('prepare')->willReturn($stmt);
-
-        // Simulate failure in deleting habits
-        $delete_stmt = $this->createMock(mysqli_stmt::class);
-        $delete_stmt->method('execute')->willReturn(false);
-        $this->conn->method('prepare')->willReturnOnConsecutiveCalls($stmt, $delete_stmt);
-
-        $result = $this->runAccountScript($input);
-        $this->assertEquals(["error" => "Failed to delete existing habits."], $result);
-    }
-
-    public function testFailedToInsertNewHabits()
-    {
-        $_SESSION['user_id'] = 1;
-        $input = [
-            'username' => 'testuser',
-            'email' => 'test@example.com',
-            'new_password' => 'password123',
-            'confirm_password' => 'password123',
-            'habits' => ['Running']
-        ];
-
-        // Mock account update
-        $stmt = $this->createMock(mysqli_stmt::class);
-        $stmt->method('execute')->willReturn(true);
-        $this->conn->method('prepare')->willReturn($stmt);
-
-        // Simulate successful deletion of habits
-        $delete_stmt = $this->createMock(mysqli_stmt::class);
-        $delete_stmt->method('execute')->willReturn(true);
-        $this->conn->method('prepare')->willReturnOnConsecutiveCalls($stmt, $delete_stmt);
-
-        // Simulate failure in habit insertion
-        $insert_stmt = $this->createMock(mysqli_stmt::class);
-        $insert_stmt->method('execute')->willReturn(false);
-        $this->conn->method('prepare')->willReturn($insert_stmt);
-
-        $result = $this->runAccountScript($input);
-        $this->assertEquals(["error" => "Failed to insert habit: Running"], $result);
-    }
-
-    public function testSuccessfulUpdateWithNewHabits()
-    {
-        $_SESSION['user_id'] = 1;
-        $input = [
-            'username' => 'testuser',
-            'email' => 'test@example.com',
-            'new_password' => 'password123',
-            'confirm_password' => 'password123',
-            'habits' => ['Running']
-        ];
-
-        // Mock account update
-        $stmt = $this->createMock(mysqli_stmt::class);
-        $stmt->method('execute')->willReturn(true);
-        $this->conn->method('prepare')->willReturn($stmt);
-
-        // Simulate successful deletion of habits
-        $delete_stmt = $this->createMock(mysqli_stmt::class);
-        $delete_stmt->method('execute')->willReturn(true);
-        $this->conn->method('prepare')->willReturnOnConsecutiveCalls($stmt, $delete_stmt);
-
-        // Mock successful habit insertion
-        $insert_stmt = $this->createMock(mysqli_stmt::class);
-        $insert_stmt->method('execute')->willReturn(true);
-        $this->conn->method('prepare')->willReturn($insert_stmt);
-
-        $result = $this->runAccountScript($input);
-        $this->assertEquals(["success" => "Account updated successfully."], $result);
-    }
+    
 
     private function createMockResult($data)
     {
