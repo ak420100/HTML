@@ -32,7 +32,7 @@ class SettingsTest extends TestCase
     private function runSettings()
     {
         ob_start();
-        include 'settings.php'; // Change to your PHP file name
+        include 'settings.php';
         return json_decode(ob_get_clean(), true);
     }
 
@@ -68,7 +68,7 @@ class SettingsTest extends TestCase
         $stmtSelect = $this->createMock(mysqli_stmt::class);
         $stmtSelect->method('execute')->willReturn(true);
         $stmtSelect->method('store_result')->willReturn(null);
-        $stmtSelect->method('num_rows')->willReturn(1); // Simulate existing settings
+        $stmtSelect->method('num_rows')->willReturn(1);
 
         $stmtUpdate = $this->createMock(mysqli_stmt::class);
         $stmtUpdate->method('execute')->willReturn(true);
